@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">Chose Animal</string>
+    <string-array name="list_name_image">
+        <item>angry_birds1</item>
+        <item>angry_birds2</item>
+        <item>angry_birds3</item>
+        <item>angry_birds4</item>
+        <item>angry_birds5</item>
+        <item>angry_birds6</item>
+        <item>angry_birds7</item>
+        <item>angry_birds8</item>
+        <item>angry_birds9</item>
+        <item>angry_birds10</item>
+        <item>angry_birds11</item>
+        <item>angry_birds12</item>
+        <item>angry_birds13</item>
+        <item>angry_birds14</item>
+        <item>angry_birds15</item>
+        <item>angry_birds16</item>
+        <item>angry_birds17</item>
+        <item>angry_birds18</item>
+
+
+    </string-array>
 </resources>
