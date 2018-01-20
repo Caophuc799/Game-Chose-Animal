@@ -1,6 +1,7 @@
 package com.caocao.choseanimal;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     String tenhinhgoc="";
     int Diem=0;
     TextView txtDiem;
+    SharedPreferences ludiemso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
         imageGoc = findViewById(R.id.imageViewGoc);
         imageNhan = findViewById(R.id.imageViewNhan);
         txtDiem = findViewById(R.id.textViewDiem);
+
+        ludiemso = getSharedPreferences("luudiemsogame",MODE_PRIVATE);
+        txtDiem.setText("Điểm: "+ludiemso.getInt("diem",0));
         String [] mangTen = getResources().getStringArray(R.array.list_name_image);
         arrayName = new ArrayList<>(Arrays.asList(mangTen));
         Collections.shuffle(arrayName);
@@ -65,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
             if(tenhinhgoc.equals(tenhinh)){
                 Diem+=10;
                 txtDiem.setText("Điểm: "+Diem);
+                LuuDiemSo();
                 Toast.makeText(MainActivity.this,"Chính xác",Toast.LENGTH_SHORT).show();
 
                 new CountDownTimer(1200,100){
@@ -88,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
             }else{
                 Diem-=20;
                 txtDiem.setText("Điểm: "+Diem);
+                LuuDiemSo();
                 Toast.makeText(MainActivity.this,"Sai rồi. Huhu",Toast.LENGTH_SHORT).show();
             }
         }
@@ -95,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
         if(requestCode==REQUEST_CODE_IMAGE && resultCode ==RESULT_CANCELED){
             Diem-=5;
             txtDiem.setText("Điểm: "+Diem);
+            LuuDiemSo();
             Toast.makeText(MainActivity.this,"Bạn chưa chọn hình. \n Bạn bị trừ 5 điểm",Toast.LENGTH_SHORT).show();
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -118,5 +126,11 @@ public class MainActivity extends AppCompatActivity {
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private  void LuuDiemSo(){
+        SharedPreferences.Editor editor = ludiemso.edit();
+        editor.putInt("diem",Diem);
+        editor.commit();
     }
 }
